@@ -41,4 +41,16 @@ test("value that is smaller than the root node must be put to the left", () => {
     expect(tree.rootNode.left.right.value).toBe(7);
     expect(tree.rootNode.left.right.left.value).toBe(6);
     expect(tree.rootNode.left.left.value).toBe(3);
-})
+});
+
+test("value that is being found does not exist", () => {
+    const tree = new Tree([1, 2, 3, 4, 5]);
+
+    expect(tree.find(6)).toBe(null);
+});
+
+test("finds a value that exists", () => {
+    const tree = new Tree([1, 2, 3, 4, 5]);
+
+    expect(tree.find(3).value).toBe(3);
+});
