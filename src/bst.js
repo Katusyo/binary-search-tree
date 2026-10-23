@@ -59,6 +59,20 @@ class Tree {
     }
 
     find(value) {
+        let currentNode = this.rootNode;
+
+        while (currentNode !== null) {
+            if (value === currentNode.value) {
+                return currentNode;
+            }
+
+            if (currentNode.value > value) {
+                currentNode = currentNode.left;
+            } else {
+                currentNode = currentNode.right;
+            }
+        }
+        return null;
     }
 
     deleteItem(value) {
