@@ -76,7 +76,55 @@ class Tree {
     }
 
     deleteItem(value) {
+        let currentNode = this.rootNode;
+        let parentNode = null;
+
+        while (currentNode !== null && currentNode.value !== value) {
+            parentNode = currentNode;
+
+            if (value < currentNode.value) {
+                currentNode = currentNode.left;
+                } else {
+                    currentNode = currentNode.right;
+                }
+            }
+
+        if (currentNode === null) {
+            return false;
+        }
+
+        if (currentNode.left === null || currentNode.right === null) {
+            const nextNode = currentNode.left !== null ? currentNode.left : currentNode.right;
+            
+            if (parentNode === null) {
+                this.rootNode = nextNode;
+            } else if (parentNode.left === currentNode) {
+                parentNode.left = nextNode;
+            } else {
+                parentNode.right = nextNode;
+            }
+        }
+
+        else {
+            let successorParent = currentNode;
+            let successor = currentNode.right;
+
+            while (successor.left !== null) {
+                successorParent = successor;
+                successor = successor.left;
+            }
+
+            currentNode.value = successor.value;
+
+            if (successorParent.left === successor) {
+                successorParent.left = successor.right;
+            } else {
+                successorParent.right = successor.right;
+            }
+        }
+        return true;
     }
+
 
     includes(value) {
     }
