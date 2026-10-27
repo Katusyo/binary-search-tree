@@ -125,8 +125,21 @@ class Tree {
         return true;
     }
 
-
     includes(value) {
+         let currentNode = this.rootNode;
+
+        while (currentNode) {
+            if (value === currentNode.value) {
+                return true;
+            }
+
+            if (currentNode.value > value) {
+                currentNode = currentNode.left;
+            } else {
+                currentNode = currentNode.right;
+            }
+        }
+        return false;
     }
 
     levelOrderForEach(callback) {

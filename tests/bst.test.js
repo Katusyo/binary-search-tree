@@ -127,3 +127,21 @@ test("deleted a root with two children", () => {
     expect(tree.find(6)).not.toBe(null);
     expect(tree.find(7)).not.toBe(null);
 })
+
+test("returns true when value exists", () => {
+    const tree = new Tree([1, 2, 3, 4, 5]);
+
+    expect(tree.includes(5)).toBe(true);
+});
+
+test("returns false when value does not exitst", () => {
+    const tree = new Tree([1, 2, 3, 4, 5]);
+
+    expect(tree.includes(99)).toBe(false);
+});
+
+test("returns false when tree is empty", () => {
+    const tree = new Tree([]);
+
+    expect(tree.includes(1)).toBe(false);
+});
