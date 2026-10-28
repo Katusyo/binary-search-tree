@@ -1,4 +1,4 @@
-import { describe, test, expect } from "@jest/globals";
+import { describe, test, expect} from "@jest/globals";
 import Tree from "../src/bst.js";
 
 describe ("Binart Search Tree", () => {
@@ -144,4 +144,34 @@ test("returns false when tree is empty", () => {
     const tree = new Tree([]);
 
     expect(tree.includes(1)).toBe(false);
+});
+
+test("throws an error when callback is missing", () => {
+    const tree = new Tree([1, 2, 3]);
+
+    expect(() => tree.levelOrderForEach()).toThrow(
+        "A callback function is required"
+    );
+});
+
+test("handles an empty tree", () => {
+    const tree = new Tree([]);
+    let called = false;
+
+    tree.levelOrderForEach(() => {
+        called = true;
+    });
+
+    expect(called).toBe(false);
+});
+
+test("visits nodes in level order", () => {
+    const tree = new Tree([1, 2, 3, 4, 5, 6, 7]);
+    const result = [];
+
+    tree.levelOrderForEach((value) => {
+        result.push(value);
+    });
+
+    expect(result).toEqual([4, 2, 6, 1, 3, 5, 7]);
 });
