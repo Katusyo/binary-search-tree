@@ -175,3 +175,114 @@ test("visits nodes in level order", () => {
 
     expect(result).toEqual([4, 2, 6, 1, 3, 5, 7]);
 });
+
+test("throws an error when callback is missing", () => {
+    const tree = new Tree([1, 2, 3]);
+
+    expect(() => tree.inOrderForEach()).toThrow(
+        "A callback function is required"
+    );
+});
+
+test("visits nodes in in-order", () => {
+    const tree = new Tree([1, 2, 3, 4, 5, 6, 7]);
+    const result = [];
+
+    tree.inOrderForEach((value) => result.push(value));
+
+    expect(result).toEqual([1, 2, 3, 4, 5, 6, 7]);
+});
+
+test("throws an error when callback is missing", () => {
+    const tree = new Tree([1, 2, 3]);
+
+    expect(() => tree.preOrderForEach()).toThrow(
+        "A callback function is required"
+    );
+});
+
+test("visits nodes in pre-order", () => {
+    const tree = new Tree([1, 2, 3, 4, 5, 6, 7]);
+    const result = [];
+
+    tree.preOrderForEach((value) => result.push(value));
+
+    expect(result).toEqual([4, 2, 1, 3, 6, 5, 7]);
+});
+
+test("throws an error when callback is missing", () => {
+    const tree = new Tree([1, 2, 3]);
+
+    expect(() => tree.postOrderForEach()).toThrow(
+        "A callback function is required"
+    );
+});
+
+test("visists nodes in post-order", () => {
+    const tree = new Tree([1, 2, 3, 4, 5, 6, 7]);
+    const result = [];
+
+    tree.postOrderForEach((value) => result.push(value));
+
+    expect(result).toEqual([1, 3, 2, 5, 7, 6, 4]);
+});
+
+test("returns the height of the root", () => {
+    const tree = new Tree([1, 2, 3, 4, 5, 6, 7]);
+
+    expect(tree.height(4)).toBe(2);
+});
+
+test( "returns the height of a leaf", () => {
+    const tree = new Tree([1, 2, 3, 4, 5, 6, 7]);
+
+    expect(tree.height(1)).toBe(0);
+});
+
+test("returns the height of a node with one child", () => {
+    const tree = new Tree([4]);
+    tree.insert(2);
+    tree.insert(1);
+
+    expect(tree.height(2)).toBe(1);
+});
+
+test("returns undefined when value does not exist", () => {
+    const tree= new Tree([1, 2, 3, 4, ,5]);
+
+    expect(tree.height(99)).toBeUndefined();
+});
+
+test("returns 0 for the root node", () => {
+    const tree = new Tree([10,5, 15, 3, 7, 18]);
+
+    expect(tree.depth(10)).toBe(0);
+});
+
+test("returns 1 for immediate children of the root", () => {
+    const tree = new Tree([10, 5, 15, 3, 7, 18]);
+
+    expect(tree.depth(5)).toBe(1);
+    expect(tree.depth(18)).toBe(1);
+});
+
+test("returns the correct depth for leaf nods deeper in the tree", () => {
+    const tree = new Tree([10, 5, 15, 3, 7, 18]);
+
+    expect(tree.depth(3)).toBe(2);
+    expect(tree.depth(7)).toBe(2);
+    expect(tree.depth(15)).toBe(2);
+});
+
+test("returns undefined if the value does not exitst", () => {
+    const tree = new Tree([10, 5, 15, 3, 7, 18]);
+
+    expect(tree.depth(100)).toBeUndefined();
+    expect(tree.depth(0)).toBeUndefined();
+});
+
+test("returns undefined when the tree is completely empty", () => {
+    const tree = new Tree([]);
+
+    expect(tree.depth(19)).toBeUndefined();
+});

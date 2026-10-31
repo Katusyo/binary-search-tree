@@ -168,18 +168,100 @@ class Tree {
     }
 
     inOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("A callback function is required");
+        }
+
+        const traverse = (node) => {
+            if (!node) return;
+
+        traverse(node.left);
+        callback(node.value);
+        traverse(node.right);
+        };
+
+        traverse(this.rootNode);
     }
 
     preOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("A callback function is required");
+        }
+
+        const traverse = (node) => {
+            if (!node) return;
+
+        callback(node.value);
+        traverse(node.left);
+        traverse(node.right);
+        };
+
+        traverse(this.rootNode);
     }
 
     postOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("A callback function is required");
+        }
+
+        const traverse = (node) => {
+            if (!node) return;
+
+        traverse(node.left);
+        traverse(node.right);
+        callback(node.value);
+        };
+
+        traverse(this.rootNode);
     }
 
     height(value) {
+        let currentNode = this.rootNode;
+
+        while (currentNode !== null) {
+            if (value === currentNode.value) {
+                break;
+            }
+            if (value < currentNode.value) {
+                currentNode = currentNode.left;
+            } else {
+                currentNode = currentNode.right;
+            }
+        } 
+
+        if (currentNode === null) {
+            return undefined;
+        }
+
+        const getHeight = (node) => {
+            if (!node) return -1;
+
+            const leftHeight = getHeight(node.left);
+            const rightHeight = getHeight(node.right);
+
+            return Math.max(leftHeight, rightHeight) + 1;
+        };
+
+        return getHeight(currentNode);
     }
 
     depth(value) {
+        let currentNode = this.rootNode;
+        let edgeCount = 0;
+            
+        while (currentNode) {
+            if (value === currentNode.value) {
+               return edgeCount;
+            }
+
+            if (value < currentNode.value) {
+                currentNode = currentNode.left;
+            } else {
+                currentNode = currentNode.right;
+            }  
+            edgeCount++;
+            }
+            return undefined
     }
 
     isBalanced() {
