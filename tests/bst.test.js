@@ -286,3 +286,70 @@ test("returns undefined when the tree is completely empty", () => {
 
     expect(tree.depth(19)).toBeUndefined();
 });
+
+test("returns true for a balanced tree", () => {
+    const tree = new Tree([1, 2, 3, 4, 5, 6, 7]);
+
+    expect(tree.isBalanced()).toBe(true);
+});
+
+test("returns false for an unbalanced tree", () => {
+    const tree = new Tree([1]);
+
+    tree.insert(2);
+    tree.insert(3);
+    tree.insert(4);
+
+    expect(tree.isBalanced()).toBe(false);
+});
+
+test("returns true for an empty tree", () => {
+    const tree = new Tree([]);
+
+    expect(tree.isBalanced()).toBe(true);
+});
+
+test("returns true for a tree with one node", () => {
+    const tree = new Tree([10]);
+
+    expect(tree.isBalanced()).toBe(true);
+});
+
+test("rebalances a skewed tree", () => {
+    const tree = new Tree([]);
+
+    tree.insert(1);
+    tree.insert(2);
+    tree.insert(3);
+    tree.insert(4);
+    tree.insert(5);
+
+    expect(tree.isBalanced()).toBe(false);
+    tree.rebalance();
+    expect(tree.isBalanced()).toBe(true);
+    expect(tree.depth(3)).toBe(0);
+    expect(tree.depth(1)).toBe(2);
+    expect(tree.depth(5)).toBe(1);
+    expect(tree.depth(4)).toBe(2);
+    expect(tree.depth(2)).toBe(1);
+});
+
+test("handle rebalancing on an already balanced tree", () => {
+    const tree = new Tree([]);
+
+    tree.insert(10);
+    tree.insert(5);
+    tree.insert(15);
+
+    expect(tree.isBalanced()).toBe(true);
+    tree.rebalance();
+    expect(tree.isBalanced()).toBe(true);
+    expect(tree.depth(10)).toBe(0);
+});
+
+test("exits when rebalancing an empty tree", () => {
+    const tree = new Tree([]);
+
+    expect(() => tree.rebalance()).not.toThrow();
+    expect(tree.rootNode).toBeNull();
+});
