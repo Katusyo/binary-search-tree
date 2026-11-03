@@ -24,6 +24,10 @@ function runDriverScript() {
     const preOrderElements = [];
     bst.preOrderForEach((value) => preOrderElements.push(value));
     console.log(`3. Pre-Order Elements Traversal:\n [${preOrderElements.join(', ')}]\n`);
+
+    const inOrderElements = [];
+    bst.inOrderForEach((value) => inOrderElements.push(value));
+    console.log(`3b. In-Order Elements Traversal (should be sorted):\n [$inOrderElements.join(', ')}]\n`);
     
     console.log("4. Unbalancing the tree by inserting large values (101, 102, 103, 104, 105)...");
     bst.insert(101);
@@ -51,6 +55,10 @@ function runDriverScript() {
     const postRebalanceElements = [];
     bst.preOrderForEach((value) => postRebalanceElements.push(value));
     console.log(`7. New Pre-Order Elements Traversal:\n  [${postRebalanceElements.join(', ')}]\n`);
+
+    const postRebalanceInOrder = [];
+    bst.inOrderForEach((value) => postRebalanceInOrder.push(value));
+    console.log(`7B. New In-Order ELements Traversal (Should still be sorted with new items):\n  [${postRebalanceInOrder.join(', ')}]\n`);
 
     const newRootValue = bst.rootNode.value;
     console.log(`8. Quick check on the new Root Node (${newRootValue}):`);
