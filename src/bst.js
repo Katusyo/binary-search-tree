@@ -191,9 +191,9 @@ class Tree {
         const traverse = (node) => {
             if (!node) return;
 
-        callback(node.value);
-        traverse(node.left);
-        traverse(node.right);
+            callback(node.value);
+            traverse(node.left);
+            traverse(node.right);
         };
 
         traverse(this.rootNode);
@@ -305,5 +305,14 @@ class Tree {
         this.rootNode = this.buildTree(sortedValues);
     }
 }
+
+export const prettyPrint = (node, prefix = "", isLeft = true) => {
+  if (node === null || node === undefined) {
+    return;
+  }
+  prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
+  prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+};
 
 export default Tree;
