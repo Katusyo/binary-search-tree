@@ -21,17 +21,21 @@ function runDriverScript() {
 
     console.log(`2. Is the tree balanced? -> ${bst.isBalanced() ? "O YES" : "X NO"}\n`);
 
+    let nodeCount = 0;
+    bst.levelOrderForEach(() => nodeCount++);
+    console.log(`Number of nodes after balance check: ${nodeCount}`);    
+
     const preOrderElements = [];
     bst.preOrderForEach((value) => preOrderElements.push(value));
     console.log(`3. Pre-Order Elements Traversal:\n [${preOrderElements.join(', ')}]\n`);
 
     const inOrderElements = [];
     bst.inOrderForEach((value) => inOrderElements.push(value));
-    console.log(`3b. In-Order Elements Traversal (should be sorted):\n [$inOrderElements.join(', ')}]\n`);
+    console.log(`3b. In-Order Elements Traversal (should be sorted):\n [${inOrderElements.join(', ')}]\n`);
 
     const postOrderElements = [];
     bst.postOrderForEach((value) => postOrderElements.push(value));
-    console.log(`3c. Post-Order Elements Traversal:\n [${postOrderElements,join(', ')}]`);
+    console.log(`3c. Post-Order Elements Traversal:\n [${postOrderElements.join(', ')}]`);
     
     console.log("4. Unbalancing the tree by inserting large values (101, 102, 103, 104, 105)...");
     bst.insert(101);
@@ -52,7 +56,6 @@ function runDriverScript() {
 
     console.log(`6. Is the tree balanced after rebalancing? -> ${bst.isBalanced() ? "O YES" : "X NO"}\n`);
 
-    let nodeCount = 0;
     bst.levelOrderForEach(() => nodeCount++);
     console.log(`Number of nodes after rebalancing: ${nodeCount}`);
 
