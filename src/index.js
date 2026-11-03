@@ -27,7 +27,7 @@ function runDriverScript() {
 
     const levelOrderElements = [];
     bst.levelOrderForEach((value) => levelOrderElements.push(value));
-    console.log(`3a. Level-Prder Elements Trversal:\n [${ levelOrderElements.join(', ')}]\n`);
+    console.log(`3a. Level-Order Elements Traversal:\n [${ levelOrderElements.join(', ')}]\n`);
 
     const preOrderElements = [];
     bst.preOrderForEach((value) => preOrderElements.push(value));
@@ -77,7 +77,7 @@ function runDriverScript() {
 
     const postRebalanceInOrder = [];
     bst.inOrderForEach((value) => postRebalanceInOrder.push(value));
-    console.log(`7B. New In-Order ELements Traversal (Should still be sorted with new items):\n  [${postRebalanceInOrder.join(', ')}]\n`);
+    console.log(`7B. New In-Order Elements Traversal (Should still be sorted with new items):\n  [${postRebalanceInOrder.join(', ')}]\n`);
 
     const postRebalancePostOrder = [];
     bst.postOrderForEach((value) => postRebalancePostOrder.push(value));
