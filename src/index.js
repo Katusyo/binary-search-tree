@@ -23,7 +23,11 @@ function runDriverScript() {
 
     let nodeCount = 0;
     bst.levelOrderForEach(() => nodeCount++);
-    console.log(`Number of nodes after balance check: ${nodeCount}`);    
+    console.log(`Number of nodes after balance check: ${nodeCount}`);
+
+    const levelOrderElements = [];
+    bst.levelOrderForEach((value) => levelOrderElements.push(value));
+    console.log(`3a. Level-Prder Elements Trversal:\n [${ levelOrderElements.join(', ')}]\n`);
 
     const preOrderElements = [];
     bst.preOrderForEach((value) => preOrderElements.push(value));
@@ -31,11 +35,11 @@ function runDriverScript() {
 
     const inOrderElements = [];
     bst.inOrderForEach((value) => inOrderElements.push(value));
-    console.log(`3b. In-Order Elements Traversal (should be sorted):\n [${inOrderElements.join(', ')}]\n`);
+    console.log(`3B. In-Order Elements Traversal (should be sorted):\n [${inOrderElements.join(', ')}]\n`);
 
     const postOrderElements = [];
     bst.postOrderForEach((value) => postOrderElements.push(value));
-    console.log(`3c. Post-Order Elements Traversal:\n [${postOrderElements.join(', ')}]`);
+    console.log(`3C. Post-Order Elements Traversal:\n [${postOrderElements.join(', ')}]`);
     
     console.log("4. Unbalancing the tree by inserting large values (101, 102, 103, 104, 105)...");
     bst.insert(101);
@@ -63,6 +67,10 @@ function runDriverScript() {
     };
     console.log(`Number of nodes after rebalancing: ${countNodes()}`);
 
+    const postRebalanceLevelOrder = [];
+    bst.levelOrderForEach((value) => postRebalanceLevelOrder.push(value));
+    console.log(`7a. New Level-order Elements Traversal:\n [${postRebalanceLevelOrder.join(', ')}]\n`);
+
     const postRebalanceElements = [];
     bst.preOrderForEach((value) => postRebalanceElements.push(value));
     console.log(`7. New Pre-Order Elements Traversal:\n  [${postRebalanceElements.join(', ')}]\n`);
@@ -73,7 +81,7 @@ function runDriverScript() {
 
     const postRebalancePostOrder = [];
     bst.postOrderForEach((value) => postRebalancePostOrder.push(value));
-    console.log(`7c. New Post-Order Elements Traversal:\n [${postRebalancePostOrder.join(', ')}]\n`);
+    console.log(`7C. New Post-Order Elements Traversal:\n [${postRebalancePostOrder.join(', ')}]\n`);
 
     const newRootValue = bst.rootNode.value;
     console.log(`8. Quick check on the new Root Node (${newRootValue}):`);
