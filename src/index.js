@@ -56,8 +56,12 @@ function runDriverScript() {
 
     console.log(`6. Is the tree balanced after rebalancing? -> ${bst.isBalanced() ? "O YES" : "X NO"}\n`);
 
-    bst.levelOrderForEach(() => nodeCount++);
-    console.log(`Number of nodes after rebalancing: ${nodeCount}`);
+    const countNodes = () => {
+    let count = 0;
+    bst.levelOrderForEach(() => count++);
+    return count;
+    };
+    console.log(`Number of nodes after rebalancing: ${countNodes()}`);
 
     const postRebalanceElements = [];
     bst.preOrderForEach((value) => postRebalanceElements.push(value));
